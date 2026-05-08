@@ -1,9 +1,23 @@
 using System;
+using System.Reflection.Metadata;
 
-class Program
+namespace game
 {
-    static void Main(string[] args)
+    class Program
     {
-        Console.WriteLine("Hello World!!! ");
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!!! ");
+            Console.WriteLine("This is in C#.");
+            Console.Write("What is your favorite color? ");
+            string color = Console.ReadLine();
+
+            Console.WriteLine($"Your color is {color}");
+
+        
+                
+
+
+        }
     }
 }
