@@ -1,5 +1,4 @@
 using System;
-using System.Reflection.Metadata;
 
 namespace game
 {
@@ -7,16 +6,26 @@ namespace game
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!!! ");
-            Console.WriteLine("This is in C#.");
-            Console.Write("What is your favorite color? ");
-            string color = Console.ReadLine();
+            Console.Write("Enter number: ");
+            string valueFromUser = Console.ReadLine();
+            
 
-            Console.WriteLine($"Your color is {color}");
+            int x = int.Parse(valueFromUser);
+            int y = 2;
+            int z = 5;
 
-        
-                
-
+            if (!(x < y || x < z) && y < z)
+            {
+                Console.WriteLine("Greater");
+            }
+            else if (x < y)
+            {
+                Console.WriteLine("Less");
+            }
+            else
+            {
+                Console.WriteLine("Equal");
+            }
 
         }
     }
