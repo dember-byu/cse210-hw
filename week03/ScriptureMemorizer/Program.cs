@@ -1,21 +1,32 @@
 using System;
 using System.Collections.Generic;
 
+// CREATIVITY REPORT:
+// 1. Added a Scripture Library loaded directly from an external text file ("scriptures.txt").
+
 class Program
 {
     static void Main(string[] args)
     {
-        List<Scripture> scriptureLibrary = new List<Scripture>
+        string filename = "scriptures.txt";
+        
+        List<Scripture> scriptureLibrary = Scripture.LoadScripturesFromFile(filename);
+
+        if (scriptureLibrary.Count == 0)
         {
-            new Scripture(new Reference("Proverbs", 3, 5, 6), "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight."),
-            new Scripture(new Reference("John", 3, 16), "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."),
-            new Scripture(new Reference("Philippians", 4, 13), "I can do all this through him who gives me strength."),
-            new Scripture(new Reference("Joshua", 1, 9), "Have I not commanded you? Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.")
-        };
+            Console.WriteLine($"Warning: '{filename}' not found or empty. Loading default scripture...");
+            scriptureLibrary.Add(new Scripture(
+                new Reference("Proverbs", 3, 5, 6), 
+                "Trust in the Lord with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths."
+            ));
+            Console.WriteLine("Press Enter to continue...");
+            Console.ReadLine();
+        }
 
         Random random = new Random();
         Scripture selectedScripture = scriptureLibrary[random.Next(scriptureLibrary.Count)];
-        
+
+
         while (true)
         {
             Console.Clear();
@@ -24,11 +35,11 @@ class Program
 
             if (selectedScripture.IsCompletelyHidden())
             {
-                Console.WriteLine("Great job! You have hidden the entire Scripture.");
+                Console.WriteLine("Great job! You have hidden the entire scripture.");
                 break;
             }
 
-            Console.WriteLine("Press Enter to hide more words or type 'quit' to exit.");
+            Console.WriteLine("Press Enter to hide words, or type 'quit' to exit:");
             string input = Console.ReadLine();
 
             if (input.Trim().ToLower() == "quit")
