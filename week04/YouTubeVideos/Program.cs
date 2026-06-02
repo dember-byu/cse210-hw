@@ -3,88 +3,6 @@ using System.Collections.Generic;
 
 namespace YouTubeVideos
 {
-    
-    public class Comment
-    {
-        
-        private string _commenterName;
-        private string _commentText;
-
-        
-        public Comment(string commenterName, string commentText)
-        {
-            _commenterName = commenterName;
-            _commentText = commentText;
-        }
-
-        
-        public string GetCommenterName()
-        {
-            return _commenterName;
-        }
-
-        public string GetCommentText()
-        {
-            return _commentText;
-        }
-
-        
-        public void DisplayComment()
-        {
-            Console.WriteLine($"- {_commenterName}: \"{_commentText}\"");
-        }
-    }
-
-    
-    public class Video
-    {
-        // Member variables
-        private string _title;
-        private string _author;
-        private int _lengthInSeconds;
-        private List<Comment> _comments;
-
-        
-        public Video(string title, string author, int lengthInSeconds)
-        {
-            _title = title;
-            _author = author;
-            _lengthInSeconds = lengthInSeconds;
-            _comments = new List<Comment>();
-        }
-
-        
-        public void AddComment(Comment comment)
-        {
-            _comments.Add(comment);
-        }
-
-        
-        public int GetCommentCount()
-        {
-            return _comments.Count;
-        }
-
-        
-        public void DisplayVideoInfo()
-        {
-            Console.WriteLine("==================================================");
-            Console.WriteLine($"Title:  {_title}");
-            Console.WriteLine($"Author: {_author}");
-            Console.WriteLine($"Length: {_lengthInSeconds} seconds");
-            Console.WriteLine($"Total Comments: {GetCommentCount()}");
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine("Comments:");
-            
-            foreach (Comment comment in _comments)
-            {
-                comment.DisplayComment();
-            }
-            Console.WriteLine("==================================================\n");
-        }
-    }
-
-    
     class Program
     {
         static void Main(string[] args)
@@ -92,7 +10,6 @@ namespace YouTubeVideos
             
             List<Video> videoList = new List<Video>();
 
-            
             Video video1 = new Video("C# Abstraction Explained in 10 Minutes", "CodeCraft", 600);
             video1.AddComment(new Comment("Alice Smith", "This cleared up so much confusion about OOP!"));
             video1.AddComment(new Comment("Bob Jones", "Great pacing, thanks for the clear diagrams."));
@@ -121,11 +38,22 @@ namespace YouTubeVideos
             videoList.Add(video4);
 
             
-            Console.WriteLine("YOUTUBE VIDEO TRACKING SYSTEM REPORT\n");
-            
             foreach (Video video in videoList)
             {
-                video.DisplayVideoInfo();
+                Console.WriteLine("==================================================");
+                Console.WriteLine($"Title: {video.Title}");
+                Console.WriteLine($"Author: {video.Author}");
+                Console.WriteLine($"Length: {video.LengthInSeconds} seconds");
+                Console.WriteLine($"Number of Comments: {video.GetCommentCount()}");
+                Console.WriteLine("--------------------------------------------------");
+                Console.WriteLine("Comments:");
+
+                
+                foreach (Comment comment in video.GetComments())
+                {
+                    Console.WriteLine($"- {comment.CommenterName}: \"{comment.CommentText}\"");
+                }
+                Console.WriteLine("==================================================\n");
             }
         }
     }
